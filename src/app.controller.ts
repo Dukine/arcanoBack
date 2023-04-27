@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('cart-history')
-  getUserCart(): string {
-    return this.appService.getUserCart();
+  getUserCart() {
+    return this.appService.getUserHistory();
   }
 }
