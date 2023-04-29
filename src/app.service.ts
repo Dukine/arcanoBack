@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { Observable, firstValueFrom } from 'rxjs';
-import { AxiosResponse } from 'axios';
-import { iCart, iProduct, iUser } from './interfaces';
+import { Observable, catchError, firstValueFrom } from 'rxjs';
+import { AxiosError, AxiosResponse } from 'axios';
+import { iCart, iProduct, iUser, iCartProduct } from './interfaces';
 
 @Injectable()
 export class AppService {
@@ -12,8 +12,27 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async getUserHistory() {
-    return await this.getUserCart('2');
+  async getUserHistory(id: string) {
+    const user = await this.getUser(id);
+    const carts = await this.getUserCart(id);
+    const products = await this.getProducts();
+
+    const userHistory = {
+      ...user,
+      history: carts.map((cart) => {
+        return {
+          ...cart,
+          products: cart.products.map((product) => {
+            return {
+              quantity: product.quantity,
+              product: products.find((prod) => prod.id === product.productId),
+            };
+          }),
+        };
+      }),
+    };
+
+    return userHistory;
   }
 
   //Http Requests
