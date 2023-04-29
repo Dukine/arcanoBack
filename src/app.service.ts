@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { Observable, catchError, firstValueFrom } from 'rxjs';
-import { AxiosError, AxiosResponse } from 'axios';
-import { iCart, iProduct, iUser, iCartProduct } from './interfaces';
+import { firstValueFrom } from 'rxjs';
+import { iCart, iProduct, iUser } from './interfaces';
+import { UserHistoryDto } from './dto';
 
 @Injectable()
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
-
-  getHello(): string {
-    return 'Hello World!';
-  }
 
   async getUserHistory(id: string) {
     const user = await this.getUser(id);
@@ -22,17 +18,19 @@ export class AppService {
       history: carts.map((cart) => {
         return {
           ...cart,
-          products: cart.products.map((product) => {
+          products: cart.products.map((cartProduct) => {
             return {
-              quantity: product.quantity,
-              product: products.find((prod) => prod.id === product.productId),
+              ...cartProduct,
+              product: products.find(
+                (prod) => prod.id === cartProduct.productId,
+              ),
             };
           }),
         };
       }),
     };
 
-    return userHistory;
+    return new UserHistoryDto(userHistory);
   }
 
   //Http Requests
