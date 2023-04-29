@@ -7,6 +7,6 @@ export class AppController {
 
   @Get('cart-history')
   getUserCart() {
-    return this.appService.getUserHistory();
+    return this.appService.getUserHistory('2');
   }
 }

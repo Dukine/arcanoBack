@@ -29,7 +29,7 @@ export interface iCart {
   __v: number;
 }
 
-interface iCartProduct {
+export interface iCartProduct {
   productId: number;
   quantity: number;
 }
