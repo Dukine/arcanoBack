@@ -4,8 +4,11 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
   SerializeOptions,
+  Query,
 } from '@nestjs/common';
+
 import { AppService } from './app.service';
+import { UserHistoryDto } from './dto';
 
 @Controller()
 export class AppController {
@@ -14,7 +17,7 @@ export class AppController {
   @Get('cart-history')
   @SerializeOptions({ excludeExtraneousValues: true })
   @UseInterceptors(ClassSerializerInterceptor)
-  getUserCart() {
-    return this.appService.getUserHistory('2');
+  getUserCart(@Query('id') id: string): Promise<UserHistoryDto> {
+    return this.appService.getUserHistory(id ? id : '1');
   }
 }
