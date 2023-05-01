@@ -1,7 +1,8 @@
 import { Expose, Transform, Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger/dist/decorators';
 
-class Address {
+export class Address {
   @Expose()
   geolocation: {
     lat: string;
@@ -21,60 +22,66 @@ class Address {
   zipcode: string;
 }
 
-class Product {
+export class Product {
+  @ApiProperty()
   @Expose()
   id: number;
 
+  @ApiProperty()
   @Expose()
   title: string;
 
+  @ApiProperty()
   @Expose()
   price: number;
 
+  @ApiProperty()
   @Expose()
   description: string;
 
+  @ApiProperty()
   @Expose()
   category: string;
 
+  @ApiProperty()
   @Expose()
   image: string;
-
-  @Expose()
-  rating: {
-    rate: number;
-    count: number;
-  };
 }
 
-class CartProduct {
+export class CartProduct {
+  @ApiProperty()
   @Expose()
   quantity: number;
 
+  @ApiProperty()
   @Expose()
   @ValidateNested()
   @Type(() => Product)
   product: Product;
 }
 
-class Cart {
+export class Cart {
+  @ApiProperty()
   @Expose()
   id: number;
 
+  @ApiProperty()
   @Expose()
   date: string;
 
+  @ApiProperty({ type: [CartProduct] })
   @Expose()
   @ValidateNested({ each: true })
   @Type(() => CartProduct)
   products: CartProduct[];
 }
 
-@Expose()
 export class UserHistoryDto {
+  @ApiProperty()
   @Expose()
   id: number;
 
+  @ApiProperty({ type: String })
   @Expose()
   @Transform(({ value }) => `${value.firstname} ${value.lastname}`)
   name: {
@@ -82,9 +89,11 @@ export class UserHistoryDto {
     lastname: string;
   };
 
+  @ApiProperty()
   @Expose()
   username: string;
 
+  @ApiProperty()
   @Expose()
   email: string;
 
@@ -92,6 +101,7 @@ export class UserHistoryDto {
   @Type(() => Address)
   address: Address;
 
+  @ApiProperty({ type: [Cart] })
   @Expose()
   @ValidateNested({ each: true })
   @Type(() => Cart)
