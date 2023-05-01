@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 
@@ -47,6 +47,10 @@ export class AppService {
     const { data } = await firstValueFrom(
       this.httpService.get<iUser>(`https://fakestoreapi.com/users/${id}`),
     );
+
+    if (!data) {
+      throw new NotFoundException('User not found!');
+    }
 
     return data;
   }
