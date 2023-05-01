@@ -17,12 +17,14 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('cart-history')
+  //Swagger decorators
   @ApiOkResponse({ description: 'User Found', type: UserHistoryDto })
   @ApiQuery({
     name: 'id',
     required: false,
     description: "User's ID",
   })
+  //Serializer decorators
   @SerializeOptions({ excludeExtraneousValues: true })
   @UseInterceptors(ClassSerializerInterceptor)
   getUserCart(@Query('id') id: string | undefined): Promise<UserHistoryDto> {
