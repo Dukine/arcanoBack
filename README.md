@@ -1,10 +1,12 @@
 # Teste Pratico Arcano
 
-Backend repository: https://github.com/Dukine/arcanoBack
+Frontend repository: https://github.com/Dukine/arcanoFront
 
-Url for this aplication: http://localhost:3000
+Url for this aplication: http://localhost:3001
 
 Start with `yarn start`
+
+Url for documentation(swagger):http://localhost:3001/api
 
 # Nest Documentation
 
