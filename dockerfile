@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:18.12.1
 
 WORKDIR /user/src/api
 
