@@ -1,5 +1,7 @@
 # Teste Pratico Arcano
 
+## About
+
 Backend of the practical test proposed by Arcano Projetos.
 The project uses public data from 'fakestoreapi' to search for a user and return their cart history.
 
@@ -14,6 +16,8 @@ Techs used:
 </ul>
 
 Frontend repository: https://github.com/Dukine/arcanoFront
+
+## Starting
 
 Start with `yarn install` and `yarn start`
 For docker use `docker-compose up`
