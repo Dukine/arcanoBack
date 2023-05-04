@@ -1,10 +1,28 @@
 # Teste Pratico Arcano
 
+## About
+
+Backend of the practical test proposed by Arcano Projetos.
+The project uses public data from 'fakestoreapi' to search for a user and return their cart history.
+
+Fakestoreapi documentation: https://fakestoreapi.com/docs
+
+Techs used:
+
+<ul>
+<li>NestJs</li>
+<li>Axios</li>
+<li>Swagger</li>
+</ul>
+
 Frontend repository: https://github.com/Dukine/arcanoFront
 
-Url for this aplication: http://localhost:3001
+## Starting
 
-Start with `yarn start`
+Start with `yarn install` and `yarn start`\
+For docker use `docker-compose up`
+
+Url for this aplication: http://localhost:3001
 
 Url for documentation(swagger):http://localhost:3001/api
 
